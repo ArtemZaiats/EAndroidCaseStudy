@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/item_layout_height"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/iv_deviceImage"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:padding="@dimen/standard_padding" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:layout_weight="3"
+        android:padding="@dimen/standard_padding"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_homeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="@dimen/home_number_text_size"
+            tools:text="Home Number 1"
+            />
+
+        <TextView
+            android:id="@+id/tv_deviceSN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="SN: 1234567890"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_arrow"
+        android:layout_width="@dimen/item_device_arrow_size"
+        android:layout_height="@dimen/item_device_arrow_size"
+        android:layout_gravity="end|center_vertical"
+        android:src="@drawable/ic_arrow_right" />
+
+</LinearLayout>
