@@ -17,8 +17,8 @@ interface DeviceDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(devices: List<Device>)
 
-    @Update
-    suspend fun update(device: Device)
+    @Query("UPDATE `device-table` SET homeName = :homeName WHERE id = :id")
+    suspend fun update(homeName: String, id: Long)
 
     @Delete
     suspend fun delete(device: Device)

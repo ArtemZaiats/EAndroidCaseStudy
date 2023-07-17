@@ -13,7 +13,6 @@ import kotlinx.coroutines.withContext
 class DetailsViewModel(application: Application) : AndroidViewModel(application) {
 
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
-
     private val db by lazy { DeviceDatabase(getApplication()).deviceDao() }
 
     var device = MutableLiveData<Device>()
@@ -27,7 +26,10 @@ class DetailsViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-    fun updateDevice(device: Device) {
-
+    fun updateDevice(homeName: String, id: Long) {
+        coroutineScope.launch {
+            db.update(homeName, id)
+            getDeviceById(id)
+        }
     }
 }

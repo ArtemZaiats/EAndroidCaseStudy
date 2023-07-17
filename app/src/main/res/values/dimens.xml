@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="standard_padding">8dp</dimen>
+    <dimen name="standard_margin">8dp</dimen>
     <dimen name="item_layout_height">100dp</dimen>
     <dimen name="home_number_text_size">22sp</dimen>
     <dimen name="item_device_arrow_size">56dp</dimen>

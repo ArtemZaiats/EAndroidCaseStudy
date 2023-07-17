@@ -7,29 +7,37 @@
     android:orientation="vertical"
     tools:context=".view.DetailFragment">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarDetailFragment"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"/>
+    </com.google.android.material.appbar.AppBarLayout>
+
     <include
+        android:id="@+id/headerLayout"
         layout="@layout/header_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
-        android:orientation="vertical"
-        android:padding="@dimen/standard_padding">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        android:padding="@dimen/standard_padding"
+        android:layout_weight="2">
 
             <ImageView
                 android:id="@+id/deviceImage"
                 android:layout_width="@dimen/device_image_size"
                 android:layout_height="@dimen/device_image_size"
-                android:padding="@dimen/standard_padding" />
+                android:padding="@dimen/standard_padding"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
 
             <TextView
                 android:id="@+id/homeName"
@@ -39,43 +47,93 @@
                 android:padding="@dimen/standard_padding"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                tools:text="Home Number 1" />
+                tools:text="Home Number 1"
+                app:layout_constraintStart_toEndOf="@id/deviceImage"
+                app:layout_constraintTop_toTopOf="@id/deviceImage"
+                app:layout_constraintBottom_toBottomOf="@id/deviceImage"
+                />
+            
+            <EditText
+                android:id="@+id/editHomeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:padding="@dimen/standard_padding"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@id/deviceImage"
+                app:layout_constraintTop_toTopOf="@id/deviceImage"
+                app:layout_constraintBottom_toBottomOf="@id/deviceImage"
+                />
 
             <ImageView
                 android:id="@+id/editImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="center_vertical|end"
                 android:src="@drawable/ic_edit"
                 android:padding="@dimen/standard_padding"
-                android:visibility="gone"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/homeName"
+                app:layout_constraintBottom_toBottomOf="@id/homeName"
 
-        </LinearLayout>
+                />
+
+            <ImageView
+                android:id="@+id/saveImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:src="@drawable/ic_save"
+                android:padding="@dimen/standard_padding"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/editHomeName"
+                app:layout_constraintBottom_toBottomOf="@id/editHomeName"
+                />
+
 
         <TextView
             android:id="@+id/deviceSN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="SN: 1234567890" />
+            tools:text="SN: 1234567890"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/deviceImage"
+            />
 
         <TextView
             android:id="@+id/macAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="MAC Address: E1:E1:E1:E1:E1:E1" />
+            tools:text="MAC Address: E1:E1:E1:E1:E1:E1"
+            android:layout_marginTop="@dimen/standard_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/deviceSN"
+            />
 
         <TextView
             android:id="@+id/firmware"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Firmware: 1234567890" />
+            tools:text="Firmware: 1234567890"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/macAddress"/>
 
         <TextView
             android:id="@+id/model"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Model: Vera Edge" />
+            tools:text="Model: Vera Edge"
+            android:layout_marginTop="@dimen/standard_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/firmware"
+            />
 
-    </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
