@@ -80,7 +80,6 @@ class ListFragment : Fragment() {
             .setCancelable(false)
             .setPositiveButton("OK") { dialog, _ ->
                 viewModel.deleteDeviceById(device.id)
-                viewModel.devices.value?.let { devicesAdapter.updateDevices(it) }
                 dialog.dismiss()
             }
             .setNegativeButton("Cancel") { dialog, _ ->

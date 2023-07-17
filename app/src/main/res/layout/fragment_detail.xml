@@ -41,6 +41,15 @@
                 android:textStyle="bold"
                 tools:text="Home Number 1" />
 
+            <ImageView
+                android:id="@+id/editImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_edit"
+                android:padding="@dimen/standard_padding"
+                android:visibility="gone"/>
+
         </LinearLayout>
 
         <TextView

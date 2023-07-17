@@ -9,6 +9,7 @@ import com.example.eandroidcasestudy.room.DeviceDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -23,17 +24,6 @@ class ListViewModel(application: Application) : AndroidViewModel(application) {
     val devices = MutableLiveData<List<Device>>()
     val loading = MutableLiveData<Boolean>()
 
-    var device = MutableLiveData<Device>()
-
-    fun getDeviceById(id: Int) {
-        coroutineScope.launch {
-            val currentDevice = db.fetchDeviceById(id)
-            withContext(Dispatchers.Main) {
-                device.value = currentDevice
-            }
-        }
-    }
-
     fun deleteDeviceById(id: Long) {
         coroutineScope.launch {
             db.deleteDeviceById(id)
@@ -46,12 +36,14 @@ class ListViewModel(application: Application) : AndroidViewModel(application) {
 
         job = coroutineScope.launch {
             val response = getResponse()
-            saveDevices(response)
+            if (response.isNotEmpty()) {
+                saveDevices(response)
+            } else {
+                delay(300L)
+                saveDevices(response)
+            }
             getAllDevices()
         }
-    }
-
-    fun updateDevice(device: Device) {
     }
 
     private fun getAllDevices() {
@@ -70,7 +62,7 @@ class ListViewModel(application: Application) : AndroidViewModel(application) {
         cachedDevices.forEach {
             it.homeName = "Home Name ${index++}"
         }
-        CoroutineScope(Dispatchers.IO).launch {
+        coroutineScope.launch {
             db.insertAll(cachedDevices)
         }
     }

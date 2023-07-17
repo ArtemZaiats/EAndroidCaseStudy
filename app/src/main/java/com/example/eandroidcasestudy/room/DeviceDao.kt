@@ -27,8 +27,8 @@ interface DeviceDao {
     suspend fun deleteDeviceById(id: Long)
 
     @Query("SELECT * FROM `device-table`")
-    fun fetchAllDevices(): List<Device>
+    suspend fun fetchAllDevices(): List<Device>
 
     @Query("SELECT * FROM `device-table` WHERE id = :id")
-    suspend fun fetchDeviceById(id: Int): Device
+    suspend fun fetchDeviceById(id: Long): Device
 }
