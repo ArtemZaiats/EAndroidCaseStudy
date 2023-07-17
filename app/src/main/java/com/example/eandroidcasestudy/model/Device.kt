@@ -1,9 +1,12 @@
 package com.example.eandroidcasestudy.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 data class DevicesResponse(@SerializedName("Devices") val devices: List<Device>)
 
+@Entity(tableName = "device-table")
 data class Device(
     @SerializedName("PK_Device") val pkDevice: Int,
 
@@ -26,4 +29,9 @@ data class Device(
     @SerializedName("LastAliveReported") val lastAliveReported: String,
 
     @SerializedName("Platform") val platform: String
-)
+) {
+    @PrimaryKey(autoGenerate = true)
+    var id: Long = 0
+
+    var homeName: String? = ""
+}

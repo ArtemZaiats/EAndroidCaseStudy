@@ -4,4 +4,5 @@
     <dimen name="item_layout_height">100dp</dimen>
     <dimen name="home_number_text_size">22sp</dimen>
     <dimen name="item_device_arrow_size">56dp</dimen>
+    <dimen name="device_image_size">64dp</dimen>
 </resources>

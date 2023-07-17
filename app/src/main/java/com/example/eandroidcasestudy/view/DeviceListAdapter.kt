@@ -3,13 +3,20 @@ package com.example.eandroidcasestudy.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.eandroidcasestudy.R
 import com.example.eandroidcasestudy.databinding.ItemDeviceBinding
 import com.example.eandroidcasestudy.model.Device
 
-class DeviceListAdapter(var devicesList: ArrayList<Device>): RecyclerView.Adapter<DeviceListAdapter.DeviceViewHolder>() {
+class DeviceListAdapter(
+    private var devicesList: ArrayList<Device>,
+    private val listener: DeviceClickListener
+) : RecyclerView.Adapter<DeviceListAdapter.DeviceViewHolder>() {
 
     private lateinit var binding: ItemDeviceBinding
+
+    interface DeviceClickListener {
+        fun onItemClick(device: Device)
+        fun onItemLongClick(device: Device)
+    }
 
     fun updateDevices(newDevices: List<Device>) {
         devicesList.clear()
@@ -28,32 +35,25 @@ class DeviceListAdapter(var devicesList: ArrayList<Device>): RecyclerView.Adapte
         holder.bind(devicesList[position])
     }
 
-    class DeviceViewHolder(binding: ItemDeviceBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class DeviceViewHolder(binding: ItemDeviceBinding) : RecyclerView.ViewHolder(binding.root) {
 
         private val imageView = binding.ivDeviceImage
         private val homeName = binding.tvHomeName
         private val deviceNumber = binding.tvDeviceSN
 
-        fun bind(device: Device) {
-            homeName.text = "Home1"
-            "SN: ${device.pkDevice}".also { deviceNumber.text = it }
-            setImage(device.platform)
-        }
+        private val view = binding.root
 
-        private fun setImage(platform: String?) {
-            when(platform) {
-                "Sercomm G450" -> { imageView.setImageResource(R.drawable.vera_plus_big) }
-                "Sercomm G550" -> { imageView.setImageResource(R.drawable.vera_secure_big) }
-                "MiCasaVerde VeraLite" -> { imageView.setImageResource(R.drawable.vera_edge_big) }
-                "Sercomm NA900" -> { imageView.setImageResource(R.drawable.vera_edge_big) }
-                "Sercomm NA301" -> { imageView.setImageResource(R.drawable.vera_edge_big) }
-                "Sercomm NA930" -> { imageView.setImageResource(R.drawable.vera_edge_big) }
-               else -> { imageView.setImageResource(R.drawable.vera_edge_big) }
+        fun bind(device: Device) {
+            homeName.text = device.homeName
+            deviceNumber.text = "SN: ${device.pkDevice}"
+            imageView.setImage(device)
+
+            view.setOnClickListener { listener.onItemClick(device) }
+            view.setOnLongClickListener {
+                listener.onItemLongClick(device)
+                true
             }
         }
+
     }
-
-
-
-
 }
